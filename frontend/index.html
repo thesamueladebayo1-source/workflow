@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workflow Company OS</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; max-width: 900px; }
+        h1 { color: #2c3e50; }
+        section { margin-bottom: 40px; }
+        label { display: block; margin-top: 8px; }
+        input, select { width: 100%; padding: 8px; margin-top: 4px; }
+        button { padding: 10px 20px; margin-top: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    </style>
+</head>
+<body>
+    <h1>Workflow Company OS</h1>
+    <section id="employee-section">
+        <h2>Add Employee</h2>
+        <form id="employee-form">
+            <label>Name <input type="text" id="name" required></label>
+            <label>Role <input type="text" id="role"></label>
+            <label>Department <input type="text" id="department"></label>
+            <label>Salary <input type="number" id="salary" step="0.01" required></label>
+            <label>Bank Account <input type="text" id="bank"></label>
+            <button type="submit">Create Employee</button>
+        </form>
+        <div id="employee-msg"></div>
+    </section>
+
+    <section id="list-section">
+        <h2>Employees</h2>
+        <button onclick="loadEmployees()">Refresh List</button>
+        <table id="employees-table">
+            <thead>
+                <tr><th>ID</th><th>Name</th><th>Role</th><th>Department</th><th>Salary</th><th>Status</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+
+    <section id="payroll-section">
+        <h2>Payroll</h2>
+        <label>Month
+            <select id="month">
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+        </label>
+        <label>Year
+            <input type="number" id="year" value="2026">
+        </label>
+        <button onclick="previewPayroll()">Preview Payroll</button>
+        <div id="payroll-preview"></div>
+    </section>
+
+    <script src="app.js"></script>
+</body>
+</html>
