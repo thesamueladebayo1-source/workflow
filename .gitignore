@@ -1,0 +1,7 @@
+# Ignore Python cache files and local database
+__pycache__/ 
+workflow/backend/__pycache__/ 
+workflow/backend/workflow.db
+*.db
+*.pyc
+.env
