@@ -52,11 +52,20 @@ def init_db() -> None:
     cursor = conn.cursor()
 
     # Create employees table
+    #
+    # In addition to basic demographic and employment information, we store
+    # an optional ``email`` column. The email is unique per employee and
+    # is used to associate an employee with a login account. Adding the
+    # email column here allows the admin to provide the employee's
+    # address during onboarding. We also keep a contract_path for
+    # uploading documents and a status flag to mark active, on_leave
+    # or exited employees.  See documentation for more details.
     cursor.execute(
         """
         CREATE TABLE IF NOT EXISTS employees (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
+            email TEXT UNIQUE,
             role TEXT,
             department TEXT,
             salary REAL NOT NULL,
@@ -90,6 +99,27 @@ def init_db() -> None:
             gross REAL NOT NULL,
             deductions REAL NOT NULL,
             net REAL NOT NULL
+        );
+        """
+    )
+
+    # Create users table. This table stores authentication credentials and
+    # metadata for both admin and employee users. Each user has a unique
+    # email address. ``hashed_password`` may be NULL for employees who
+    # have not yet set their password during onboarding. ``role`` is
+    # either 'admin' or 'employee'. ``employee_id`` links employee
+    # users back to their employee record. When an employee is deleted
+    # the corresponding user account remains but can be orphaned; in
+    # practice you would likely cascade or archive.
+    cursor.execute(
+        """
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            email TEXT NOT NULL UNIQUE,
+            hashed_password TEXT,
+            role TEXT NOT NULL,
+            employee_id INTEGER,
+            FOREIGN KEY (employee_id) REFERENCES employees(id) ON DELETE SET NULL
         );
         """
     )
