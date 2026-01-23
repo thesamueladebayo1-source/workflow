@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Signup - Workflow</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; }
+    form { max-width: 320px; margin-bottom: 1rem; }
+    label { display: block; margin-bottom: 0.5rem; }
+    input { width: 100%; padding: 0.5rem; margin-top: 0.25rem; }
+    button { padding: 0.5rem 1rem; margin-top: 0.5rem; }
+    #error { color: red; }
+  </style>
+</head>
+<body>
+  <h2>Admin Signup</h2>
+  <form id="signup-form">
+    <label>Email
+      <input type="email" id="signup-email" required>
+    </label>
+    <label>Password (min 6 characters)
+      <input type="password" id="signup-password" minlength="6" required>
+    </label>
+    <button type="submit">Sign Up</button>
+  </form>
+  <p id="error"></p>
+  <p>Already have an account? <a href="login.html">Login here</a>.</p>
+  <script src="signup.js"></script>
+</body>
+</html>
